@@ -27,9 +27,8 @@ export const siteConfig = {
     instagramHandle: "@pacomeralgo.hn",
   },
 
-  // TODO: paste the real PedidosYa restaurant URL here once available.
-  // Until then, ordering CTAs fall back to WhatsApp automatically.
-  pedidosYaUrl: "",
+  pedidosYaUrl:
+    "https://www.pedidosya.com.hn/restaurantes/tegucigalpa/pa-comer-algo-02681aeb-d760-4493-8732-02bcb3b7488c-menu",
 
   // TODO: paste a Google Maps / Waze share link here once available.
   mapsUrl: "",

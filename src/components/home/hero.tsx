@@ -50,6 +50,7 @@ export function Hero() {
                 poster="/videos/hero-smash-poster.jpg"
                 alt="Burger PACOMERALGO recién armada, con queso derretido y salsa"
                 className="relative h-full w-full"
+                priority
               />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
             </div>

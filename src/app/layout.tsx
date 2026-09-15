@@ -16,7 +16,9 @@ const anton = Anton({
 const epilogue = Epilogue({
   variable: "--font-epilogue",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  // Only the weights actually used in the UI (font-medium / font-bold /
+  // default body text) — trims 2 unused font files from the preload set.
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 

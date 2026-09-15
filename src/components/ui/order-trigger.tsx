@@ -136,11 +136,12 @@ export function OrderTrigger({
                   >
                     <PedidosYaMark />
                     <span className="flex flex-col text-left">
-                      <span className="font-display text-lg uppercase leading-tight">
-                        PedidosYa
+                      <span className="flex items-center gap-1.5 font-display text-lg uppercase leading-tight">
+                        Ordenar en PedidosYa
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#25D366]" />
                       </span>
                       <span className="text-sm font-medium opacity-90">
-                        Delivery con seguimiento en la app
+                        Ya disponible en PedidosYa
                       </span>
                     </span>
                   </a>
