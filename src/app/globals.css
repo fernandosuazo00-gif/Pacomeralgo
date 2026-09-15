@@ -1,26 +1,141 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-cream: #fff8ec;
+  --color-cream-deep: #ffefd6;
+  --color-paper: #fffdf8;
+  --color-ink: #18110c;
+  --color-ink-soft: #3a2c22;
+
+  --color-pink: #e10b57;
+  --color-pink-dark: #a80a46;
+  --color-pink-deep: #7d0836;
+  --color-pink-light: #ff3c82;
+  --color-pink-pale: #ffe3ee;
+
+  --color-olive: #cbcba0;
+  --color-olive-deep: #9c9c74;
+  --color-olive-ink: #35341f;
+
+  --color-gambos-orange: #e3691e;
+  --color-gambos-orange-deep: #b74e11;
+  --color-gambos-cream: #fbf1dd;
+  --color-gambos-ink: #2b1b10;
+
+  --shadow-sticker: 6px 6px 0px 0px var(--color-ink);
+  --shadow-sticker-sm: 4px 4px 0px 0px var(--color-ink);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--color-cream);
+  --color-cream-deep: var(--color-cream-deep);
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+
+  --color-pink: var(--color-pink);
+  --color-pink-dark: var(--color-pink-dark);
+  --color-pink-deep: var(--color-pink-deep);
+  --color-pink-light: var(--color-pink-light);
+  --color-pink-pale: var(--color-pink-pale);
+
+  --color-olive: var(--color-olive);
+  --color-olive-deep: var(--color-olive-deep);
+  --color-olive-ink: var(--color-olive-ink);
+
+  --color-gambos-orange: var(--color-gambos-orange);
+  --color-gambos-orange-deep: var(--color-gambos-orange-deep);
+  --color-gambos-cream: var(--color-gambos-cream);
+  --color-gambos-ink: var(--color-gambos-ink);
+
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-epilogue);
+  --font-scribble: var(--font-caveat);
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-marquee-slow: marquee 60s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 40s linear infinite;
+  --animate-wiggle: wiggle 6s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+* {
+  scrollbar-color: var(--color-pink) var(--color-cream);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.font-scribble {
+  font-family: var(--font-scribble), cursive;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: var(--color-cream);
+}
+
+/* Sticker-style hard shadow used sparingly on primary CTAs and badges */
+.sticker-shadow {
+  box-shadow: var(--shadow-sticker);
+}
+.sticker-shadow-sm {
+  box-shadow: var(--shadow-sticker-sm);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
