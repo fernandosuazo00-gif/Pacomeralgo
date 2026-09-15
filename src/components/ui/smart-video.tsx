@@ -47,7 +47,17 @@ export function SmartVideo({
 }: SmartVideoProps) {
   const [allowed, setAllowed] = useState(false);
   const [inView, setInView] = useState(priority);
-  const [readyForSource, setReadyForSource] = useState(false);
+  // Pure derived value, not its own state: attach the <source> the instant
+  // both conditions are true. Earlier this waited for the `load` event
+  // first, on the theory that it would keep the heavy fetch from competing
+  // with critical resources — but on a real network that just serializes
+  // two independent downloads (critical assets, then the video) instead of
+  // letting them run in parallel like a browser normally would, making the
+  // video itself take longer to become playable. The LCP-safety this was
+  // protecting against is now handled a different way (see the component
+  // comment above: one stable element, never swapped), so there's no more
+  // reason to hold the fetch back.
+  const readyForSource = allowed && inView;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -73,27 +83,6 @@ export function SmartVideo({
     observer.observe(wrapperRef.current);
     return () => observer.disconnect();
   }, [priority]);
-
-  // Only once it's both allowed to autoplay and in view do we wait for the
-  // page to finish loading its critical resources (fonts, JS, above-the-fold
-  // images) before attaching the <source> — so a multi-megabyte fetch never
-  // competes with the initial render on a constrained mobile connection.
-  useEffect(() => {
-    if (!allowed || !inView) return;
-    let cancelled = false;
-    const enable = () => {
-      if (!cancelled) setReadyForSource(true);
-    };
-    if (document.readyState === "complete") {
-      enable();
-    } else {
-      window.addEventListener("load", enable, { once: true });
-    }
-    return () => {
-      cancelled = true;
-      window.removeEventListener("load", enable);
-    };
-  }, [allowed, inView]);
 
   useEffect(() => {
     if (readyForSource && videoRef.current) {
