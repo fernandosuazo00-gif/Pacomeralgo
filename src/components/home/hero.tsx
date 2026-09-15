@@ -1,7 +1,5 @@
-"use client";
-
+import type { CSSProperties } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
 import { OrderTrigger } from "@/components/ui/order-trigger";
 import { SmartVideo } from "@/components/ui/smart-video";
 import { Reveal } from "@/components/ui/reveal";
@@ -38,12 +36,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
           {/* Video card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94, rotate: -3 }}
-            animate={{ opacity: 1, scale: 1, rotate: -2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative order-1 mx-auto w-full max-w-[300px] sm:max-w-[340px] lg:order-2 lg:rotate-2 lg:max-w-none"
-          >
+          <div className="reveal-pop relative order-1 mx-auto w-full max-w-[300px] sm:max-w-[340px] lg:order-2 lg:max-w-none">
             <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[2.25rem] border-4 border-cream/15 bg-ink shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]">
               <SmartVideo
                 src="/videos/hero-smash.mp4"
@@ -56,24 +49,32 @@ export function Hero() {
             </div>
 
             {/* sticker badges */}
-            <motion.span
-              initial={{ opacity: 0, y: -10, rotate: -8 }}
-              animate={{ opacity: 1, y: 0, rotate: -8 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="absolute -left-5 -top-5 flex items-center gap-1.5 rounded-full border-2 border-ink bg-pink px-3.5 py-2 text-xs font-bold uppercase tracking-wide text-cream shadow-[4px_4px_0_0_var(--color-ink)] sm:-left-8"
+            <span
+              style={
+                {
+                  "--badge-from-y": "-10px",
+                  "--badge-rotate": "-8deg",
+                  "--reveal-delay": "0.5s",
+                } as CSSProperties
+              }
+              className="reveal-badge absolute -left-5 -top-5 flex items-center gap-1.5 rounded-full border-2 border-ink bg-pink px-3.5 py-2 text-xs font-bold uppercase tracking-wide text-cream shadow-[4px_4px_0_0_var(--color-ink)] sm:-left-8"
             >
               <SparkleIcon className="h-3.5 w-3.5" />
               Smash burgers
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 10, rotate: 6 }}
-              animate={{ opacity: 1, y: 0, rotate: 6 }}
-              transition={{ delay: 0.65, duration: 0.5 }}
-              className="absolute -bottom-4 -right-3 rounded-full border-2 border-ink bg-cream px-3.5 py-2 font-scribble text-lg text-pink shadow-[4px_4px_0_0_var(--color-ink)] sm:-right-6"
+            </span>
+            <span
+              style={
+                {
+                  "--badge-from-y": "10px",
+                  "--badge-rotate": "6deg",
+                  "--reveal-delay": "0.65s",
+                } as CSSProperties
+              }
+              className="reveal-badge absolute -bottom-4 -right-3 rounded-full border-2 border-ink bg-cream px-3.5 py-2 font-scribble text-lg text-pink shadow-[4px_4px_0_0_var(--color-ink)] sm:-right-6"
             >
               100% Angus 🔥
-            </motion.span>
-          </motion.div>
+            </span>
+          </div>
 
           {/* Copy column */}
           <div className="relative order-2 text-center lg:order-1 lg:text-left">

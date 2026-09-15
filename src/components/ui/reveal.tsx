@@ -1,82 +1,26 @@
-"use client";
-
-import { motion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import clsx from "clsx";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
   y?: number;
-  once?: boolean;
 };
 
-const makeVariants = (y: number): Variants => ({
-  hidden: { opacity: 0, y },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
-});
+// Plain CSS entrance animation (see .reveal / @keyframes reveal-up in
+// globals.css) — no JS, no IntersectionObserver, no hydration dependency.
+// Content is real, visible markup from the very first byte; it just
+// animates in shortly after paint instead of popping in instantly.
+export function Reveal({ children, className, delay = 0, y = 28 }: RevealProps) {
+  const style = {
+    "--reveal-delay": `${delay}s`,
+    "--reveal-y": `${y}px`,
+  } as CSSProperties;
 
-export function Reveal({
-  children,
-  className,
-  delay = 0,
-  y = 28,
-  once = true,
-}: RevealProps) {
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "-80px" }}
-      variants={makeVariants(y)}
-      transition={{ delay }}
-    >
+    <div className={clsx("reveal", className)} style={style}>
       {children}
-    </motion.div>
-  );
-}
-
-type StaggerProps = {
-  children: ReactNode;
-  className?: string;
-  staggerDelay?: number;
-};
-
-export function StaggerGroup({
-  children,
-  className,
-  staggerDelay = 0.08,
-}: StaggerProps) {
-  return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ staggerChildren: staggerDelay }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export function StaggerItem({
-  children,
-  className,
-  y = 20,
-}: {
-  children: ReactNode;
-  className?: string;
-  y?: number;
-}) {
-  return (
-    <motion.div className={className} variants={makeVariants(y)}>
-      {children}
-    </motion.div>
+    </div>
   );
 }

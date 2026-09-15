@@ -86,6 +86,63 @@
   }
 }
 
+/*
+ * Pure-CSS entrance animation for the Reveal component. Deliberately not
+ * JS-driven: a JS/IntersectionObserver-gated animation renders its "hidden"
+ * (opacity:0) state into the server HTML, so on a real phone the content
+ * stays invisible until React hydrates and Framer Motion initializes. CSS
+ * animations start as soon as the stylesheet is parsed, well before any JS
+ * executes, so content is never actually invisible for longer than a beat.
+ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 28px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+
+/* Same rationale, for the hero's on-mount entrance flourishes (video card,
+   sticker badges) that previously used Framer Motion's `animate` prop. */
+@keyframes reveal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-2deg);
+  }
+}
+
+.reveal-pop {
+  animation: reveal-pop 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes reveal-badge {
+  from {
+    opacity: 0;
+    transform: translateY(var(--badge-from-y, -10px)) rotate(var(--badge-rotate, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--badge-rotate, 0deg));
+  }
+}
+
+.reveal-badge {
+  animation: reveal-badge 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+
 * {
   scrollbar-color: var(--color-pink) var(--color-cream);
 }
