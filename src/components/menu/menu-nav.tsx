@@ -49,7 +49,7 @@ export function MenuNav({ categories }: { categories: MenuCategory[] }) {
   };
 
   return (
-    <div className="sticky top-[64px] z-30 border-b-2 border-ink bg-cream/95 backdrop-blur sm:top-[72px]">
+    <div className="sticky top-[64px] z-30 [transform:translateZ(0)] border-b-2 border-ink bg-cream/95 backdrop-blur sm:top-[72px]">
       <div
         ref={chipListRef}
         className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:px-8"

@@ -29,10 +29,10 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
+      <header className="fixed inset-x-0 top-0 z-50 [transform:translateZ(0)] px-3 pt-3 sm:px-4 sm:pt-4">
         <div
           className={clsx(
-            "mx-auto flex max-w-6xl items-center justify-between rounded-full border-2 border-ink px-3 py-2 transition-all duration-300 sm:px-4",
+            "mx-auto flex max-w-6xl items-center justify-between rounded-full border-2 border-ink px-3 py-2 transition-all duration-300 sm:px-4 [will-change:background-color]",
             scrolled || mobileOpen
               ? "bg-cream/95 shadow-[0_4px_0_0_var(--color-ink)] backdrop-blur"
               : "bg-cream/70 backdrop-blur-sm"
